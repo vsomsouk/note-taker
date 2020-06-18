@@ -11,3 +11,7 @@ app.get("/", function(req, res) {
   });
 
 
+// db 
+app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "./db/db.json"));
+  });
