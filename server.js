@@ -39,16 +39,16 @@ app.get("/", function(req, res) {
       if (error) {
         console.log(error);
       }
- 
+      
       const noteInfo = JSON.parse(data);
  
       const newEntry = {
         id: noteInfo.length + 1,
         title: req.body.title,
-        text:req.body.text
+        text: req.body.text
       }
  
- 
+ // adds the new note
     noteInfo.push(newEntry);
     res.json(newEntry);
  
@@ -61,8 +61,30 @@ app.get("/", function(req, res) {
 
  //delete
 
- //app.delete('/api/notes', function (req, res) {
-  //})
+ app.delete("/api/notes/:id", function (req, res) {
+   fs.readFile ("./db/db/json", "utf8", function (error, data) {
+     if (error) {
+       console.log (error);
+     }
+
+
+     const noteInfo = [];
+
+     //use splice() to remove 
+    noteInfo.splice(req.params.id - 1, 1);
+
+    //for loop updating id in db
+    for (let i = 0; i < noteInfo.length; i++) {
+      noteInfo[i].id = i + 1;
+    };
+
+    res.json(noteInfo);
+
+    fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(noteInfo, null, 2), function (err) {
+      if (err) throw err;
+    });
+   });
+  });
   
 
 
