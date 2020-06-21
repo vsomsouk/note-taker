@@ -6,40 +6,36 @@ const path = require("path");
 
 //setting up express
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 // 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
-app.use(express.static("/public"));
+app.use(express.static("public"));
 
 
 // routes
 
 // main page
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
+  res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
 //notes page
- app.get("*", function(req, res) {
-   res.sendFile(path.join(__dirname, "/public/notes.html"));
+ app.get("/notes", function(req, res) {
+   res.sendFile(path.join(__dirname, "./public/notes.html"));
 }); 
 
 
 //db
- app.get("/", function(req, res) {
-   res.sendFile(path.join(__dirname, "/db/db.json"));
+ app.get("/api/notes", function(req, res) {
+   res.sendFile(path.join(__dirname, "./db/db.json"));
  });
  
- app.use(express.urlencoded({ extended: true}));
- app.use(express.json());
- app.use(express.static("/public"));
 
- //printing in db
  
  app.post("/api/notes", function(req, res) {
-    fs.readFile(path.join(__dirname, "/db/db.json"), "utf8", function (error, data) {
+    fs.readFile(path.join(__dirname, "./db/db.json"), "utf8", function (error, data) {
       if (error) {
         console.log(error);
       }
@@ -56,7 +52,7 @@ app.get("/", function(req, res) {
     noteInfo.push(newEntry);
     res.json(newEntry);
  
-    fs.writeFile(path.join(__dirname, "/db/db.json"), JSON.stringify(noteInfo, null, 2), function (err) {
+    fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(noteInfo, null, 2), function (err) {
       if (err) throw err;
     });
  
