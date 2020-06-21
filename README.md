@@ -1,13 +1,24 @@
 # Note Taker
 
-# Description
-Note Taker an application where a user can create, save or delete notes. This application uses express backend and retrieve data from a JSON file. 
+## Description
+Note Taker is an application where a user can create, save or delete notes.  
 
-# Installation
-npm i
+## Installation
+```bash
+npm install
+```
 
-# Usage
+## Usage
+```
+Git clone https://github.com/vsomsouk/note-taker
+Node server.js
+Local host 8000
+```
 
-# Deployed Link
+## Heroku Deployed Link
+https://shrouded-plains-54902.herokuapp.com/
 
-hello
+#References
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
